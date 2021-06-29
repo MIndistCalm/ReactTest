@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Switch, Route, Link, NavLink} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
+import Main from "./components/Main";
+import Content from "./components/Content";
+import {Button} from "react-bootstrap";
+import {CONTENT_ROUTE} from "./utils/consts";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>Slawa Marlow</code> and save to reload ggwp.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const history = useHistory()
+
+    return (
+            <Router>
+                {/*<Button variant="outline-dark" onClick={() => {history.push(CONTENT_ROUTE)}}>Работа с компонентами</Button>*/}
+                <NavLink to={CONTENT_ROUTE}>Работа с компонентами</NavLink>
+                <Switch>
+                    <Route path={CONTENT_ROUTE}>
+                        <Content />
+                    </Route>
+                </Switch>
+            </Router>
+    );
 }
 
 export default App;
