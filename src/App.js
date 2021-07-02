@@ -1,24 +1,22 @@
-import {BrowserRouter as Router, Switch, Route, Link, NavLink} from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
-import Main from "./components/Main";
-import Content from "./components/Content";
-import {Button} from "react-bootstrap";
-import {CONTENT_ROUTE} from "./utils/consts";
+import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import NavBar from "./components/NavBar";
+import MainMenu from "./components/MainMenu";
+import ContentMainPage from "./components/workWithContent/ContentMainPage";
 
 function App() {
-    const history = useHistory()
-
-    return (
-            <Router>
-                {/*<Button variant="outline-dark" onClick={() => {history.push(CONTENT_ROUTE)}}>Работа с компонентами</Button>*/}
-                <NavLink to={CONTENT_ROUTE}>Работа с компонентами</NavLink>
-                <Switch>
-                    <Route path={CONTENT_ROUTE}>
-                        <Content />
-                    </Route>
-                </Switch>
-            </Router>
-    );
+  return (
+    <Router>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route path='/' exact component={MainMenu}/>
+          <Route path='/content' component={ContentMainPage}/>
+          {/*  Добавить пути на компоненты из главного общего меню*/}
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
