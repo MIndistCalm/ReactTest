@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 
 const NavBar = () => {
   const styleLink = {
-    'color': 'white',
-    'text-decoration': 'none',
+    color: 'white',
+    textDecoration: 'none',
   }
 
   return (

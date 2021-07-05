@@ -5,13 +5,13 @@ import {Link} from "react-router-dom";
 const MainMenu = () => {
 
   const styleLink = {
-    'width': '100%',
-    'background-color': '#343a40',
-    'color': 'white',
-    'padding': '.375rem .75rem',
-    'text-decoration': 'none',
-    'border-radius': '.25rem',
-    'margin-top': '.75rem'
+    width: '100%',
+    backgroundColor: '#343a40',
+    color: 'white',
+    padding: '.375rem .75rem',
+    textDecoration: 'none',
+    borderRadius: '.25rem',
+    marginTop: '.75rem'
   }
 
   return (

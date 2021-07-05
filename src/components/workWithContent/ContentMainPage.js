@@ -8,20 +8,22 @@ import Quotes from "./Quotes";
 import CategoryArticles from "./CategoryArticles";
 import CategoryQuotes from "./CategoryQuotes";
 import ArticleDetail from "./ArticleDetail";
+import EditContent from "./EditContent";
+import DeleteContent from "./DeleteContent";
 
 const ContentMainPage = () => {
 
   // const {path} = props.match;
 
   const styleLink = {
-    'width': '100%',
-    'background-color': '#343a40',
-    'color': 'white',
-    'padding': '.375rem .75rem',
-    'text-decoration': 'none',
-    'text-align': 'center',
-    'border-radius': '.25rem',
-    'margin-top': '.75rem'
+    width: '100%',
+    backgroundColor: '#343a40',
+    color: 'white',
+    padding: '.375rem .75rem',
+    textDecoration: 'none',
+    textAlign: 'center',
+    borderRadius: '.25rem',
+    marginTop: '.75rem'
   }
 
   return (
@@ -39,7 +41,9 @@ const ContentMainPage = () => {
         <Col md={9}>
           <Switch>
             <Route path={`/content/articles`} exact component={Articles} />
-            <Route path={`/content/articles/:id`} component={ArticleDetail} />
+            <Route path={`/content/articles/:id`} exact component={ArticleDetail} />
+            <Route path={`/content/articles/:id/edit`} component={EditContent} />
+            <Route path={`/content/articles/:id/delete`} component={DeleteContent} />
             <Route path={`/content/quotes`} component={Quotes} />
             <Route path={`/content/category/articles`} component={CategoryArticles} />
             <Route path={`/content/category/quotes`} component={CategoryQuotes} />
