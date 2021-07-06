@@ -9,28 +9,33 @@ const Articles = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage, setArticlesPerPage] = useState(10);
 
-  const [articles, setArticles] = useState([
+  const deleteItem = (id) => {
+        setItems(itemsMas.filter(article => article.id !== id))
+    }
+
+  const articles = [
       {
         id: 1,
         title: 'First Article',
-        description: 'Just description'
+        description: 'Just description',
+        category: 'Cat'
       },
       {
         id: 2,
         title: 'Second Article',
-        description: 'Just description'
+        description: 'Just description',
+        category: 'Dog'
       },
       {
         id: 3,
         title: 'Third Article',
-        description: 'Just description'
-      },
-    ]);
+        description: 'Just description',
+        category: 'Fog'
+      }
+    ];
 
-  const styleLink = {
-    textDecoration: 'none',
-    color: 'black',
-  }
+
+  const styleLink = 'text-decoration-none text-dark d-block col-11'
 
   useEffect(() => {
     fetchItems();
@@ -55,15 +60,26 @@ const Articles = () => {
 
   return (
     <div>
-      <h1>Статьи</h1>
+      <div className='font-weight-bold'>Статьи</div>
       {currentArticles.map(item => (
-        <div className='mb-3 pl-3 border rounded'>
-          {/*<h2 key={item.itemId}>*/}
-          {/*  <Link to={`/content/articles/${item.itemId}`} style={styleLink}>{item.item.name}</Link>*/}
-          {/*</h2>*/}
-          <h2 key={item.id}>
-            <Link to={`/content/articles/${item.id}`} style={styleLink}>{item.title}</Link>
-          </h2>
+        <div className='mb-3 pl-3 pt-2 pr-3 pb-3 border rounded container'>
+        {/*//   <h2 key={item.itemId}>*/}
+        {/*//     <Link to={`/content/articles/${item.itemId}`} style={styleLink}>{item.item.name}</Link>*/}
+        {/*  // </h2>*/}
+          <div key={item.id} className='row' >
+            <Link to={`/content/articles/${item.id}`} className={styleLink}>
+                <div className='font-weight-bold'>
+                    {item.title}
+                    <span className="ml-2 badge badge-dark">{item.category}</span>
+                </div>
+                <div className=''>
+                    {item.description}
+                </div>
+            </Link>
+              <button type="button" className="close col-1" aria-label="Close" onClick={() => {deleteItem(item.id)}}>
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
         </div>
       ))}
       <Pagination articlesPerPage={articlesPerPage} totalArticles={itemsMas.length} paginate={paginate}/>

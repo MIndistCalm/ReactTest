@@ -3,15 +3,10 @@ import {Navbar} from "react-bootstrap";
 import {Link} from 'react-router-dom';
 
 const NavBar = () => {
-  const styleLink = {
-    color: 'white',
-    textDecoration: 'none',
-  }
-
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand>
-        <Link to='/' style={styleLink}>Admin Panel</Link>
+        <Link to='/' className='text-white text-decoration-none'>Admin Panel</Link>
       </Navbar.Brand>
     </Navbar>
   );

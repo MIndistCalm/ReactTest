@@ -1,12 +1,10 @@
 version: "3"
-services:
-  react-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - ../../app/src:/app/src:ro
-    env_file:
-      - ./.env
+services: 
+    react-app:
+        # stdin_open: true
+        # tty: true
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        # env_file: 
+        #     - ./.env

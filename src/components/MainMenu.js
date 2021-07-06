@@ -4,25 +4,17 @@ import {Link} from "react-router-dom";
 
 const MainMenu = () => {
 
-  const styleLink = {
-    width: '100%',
-    backgroundColor: '#343a40',
-    color: 'white',
-    padding: '.375rem .75rem',
-    textDecoration: 'none',
-    borderRadius: '.25rem',
-    marginTop: '.75rem'
-  }
+  const styleLink = 'w-100 bg-dark text-decoration-none text-white p-2 rounded mt-2'
 
   return (
     <Container>
       <Col className="mt-3 text-center">
         <h1>Main Menu</h1>
         <ButtonGroup vertical>
-          <Link to='/content' style={styleLink}>Работа с контентом</Link>
-          <Link to='/chat' style={styleLink}>Тест чата</Link>
-          <Link to='/crypto' style={styleLink}>Крипта</Link>
-          <Link to='/comments' style={styleLink}>Комментарии</Link>
+          <Link to='/content' className={styleLink}>Работа с контентом</Link>
+          <Link to='/chat' className={styleLink}>Тест чата</Link>
+          <Link to='/crypto' className={styleLink}>Крипта</Link>
+          <Link to='/comments' className={styleLink}>Комментарии</Link>
         </ButtonGroup>
       </Col>
     </Container>
