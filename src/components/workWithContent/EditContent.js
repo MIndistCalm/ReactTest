@@ -14,7 +14,6 @@ const EditContent = ({match}) => {
       path = 'цитаты';
       break;
   }
-  console.log(pathMap, path)
 
   return (
     <Form>

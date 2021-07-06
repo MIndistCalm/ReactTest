@@ -10,16 +10,16 @@ import CategoryQuotes from "./CategoryQuotes";
 import ArticleDetail from "./ArticleDetail";
 import EditContent from "./EditContent";
 import DeleteContent from "./DeleteContent";
+import CreateContent from "./CreateContent";
 
 const ContentMainPage = () => {
 
-  // const {path} = props.match;
-
   const styleLink = 'w-100 bg-dark text-decoration-none text-center text-white p-2 rounded mt-2'
+
   return (
     <Container>
       <Row className='mt-3'>
-        <Col md={3}>
+        <Col md={2}>
           <ButtonGroup vertical>
             <Link to={`/content/articles`} className={styleLink}>Статьи</Link>
             <Link to={`/content/quotes`} className={styleLink}>Цитаты</Link>
@@ -28,9 +28,10 @@ const ContentMainPage = () => {
           </ButtonGroup>
         </Col>
 
-        <Col md={9}>
+        <Col md={10}>
           <Switch>
             <Route path={`/content/articles`} exact component={Articles} />
+            <Route path={`/content/articles/create`} component={CreateContent} />
             <Route path={`/content/articles/:id`} exact component={ArticleDetail} />
             <Route path={`/content/articles/:id/edit`} component={EditContent} />
             <Route path={`/content/articles/:id/delete`} component={DeleteContent} />

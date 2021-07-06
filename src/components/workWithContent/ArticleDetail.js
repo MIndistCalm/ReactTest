@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {Link, Route, Switch, useHistory} from "react-router-dom";
-import {ButtonGroup, Col, Container, Row} from "react-bootstrap";
+import {Link, Route, Switch, useHistory, useParams, useLocation} from "react-router-dom";
+import {ButtonGroup, Col, Container, Figure, Image, Row} from "react-bootstrap";
+import EditImage from '../../static/edit.png'
 
-const ArticleDetail = ({ match }) => {
+const ArticleDetail = (props) => {
 
-  const styleLink = 'w-100 bg-dark text-white pl-3 pt-2 pr-3 pb-2 text-decoration-none align-middle rounded ml-2'
+  const styleLink = 'pl-3 pr-3 text-decoration-none align-middle rounded'
 
   useEffect(() => {
     fetchItem();
-    console.log(match)
+    // console.log(match)
   }, []);
 
   // const [item, setItem] = useState({
@@ -22,18 +23,24 @@ const ArticleDetail = ({ match }) => {
     // console.log();
   }
 
+  console.log(props)
+
   return (
     <Container>
       <Row className='mt-3'>
-        <Col md={9}>
-          <div>Item {}</div>
-          {/*<img src={item.images.background} alt="" style={styleImages}/>*/}
-        </Col>
-        <Col md={3}>
-          <ButtonGroup horizontal>
-            <Link to={`/content/articles/${match.params.id}/edit`} className={styleLink}>Редактировать</Link>
-            <Link to={`/content/articles/${match.params.id}/delete`} className={styleLink}>Удалить</Link>
-          </ButtonGroup>
+        <Col className='shadow'>
+          <div className='d-flex h2 font-weight-bold pl-3 pt-3 justify-content-between'>
+            <div>
+              {props.location.state.item.title}
+            </div>
+            <Link to={`/content/articles/${props.match.params.id}/edit`} className={styleLink}>
+              <Figure>
+                <Figure.Image src={EditImage} width={20} />
+              </Figure>
+            </Link>
+          </div>
+          <div className='h5 font-weight-bold text-muted pl-3'>Категория: {props.location.state.item.category}</div>
+          <div className='h5 text-monospace pl-3 pb-3'>{props.location.state.item.description}</div>
         </Col>
       </Row>
     </Container>

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import Pagination from "./Pagination";
-import ArticleDetail from "./ArticleDetail";
+import {Figure} from "react-bootstrap";
+import CreateArticle from '../../static/plus-square.svg'
 
 const Articles = () => {
 
@@ -16,20 +17,27 @@ const Articles = () => {
   const articles = [
       {
         id: 1,
-        title: 'First Article',
-        description: 'Just description',
+        title: 'Кастрация кота',
+        description:
+          'Кастрация кота – это искусственное прекращение функции половых желёз, ' +
+          'чаще всего при этой операции удаляют оба семенника.\n ' +
+          'Во многих странах эта операция является обязательной для неплеменных животных, ' +
+          'так называемого, пет-класса (домашних любимцев).\n',
         category: 'Cat'
       },
       {
         id: 2,
-        title: 'Second Article',
-        description: 'Just description',
+        title: 'Летний уход за бесшерстной собакой',
+        description:
+          'Чем больше у собаки открыта кожа, тем опаснее ей находиться на солнце. ' +
+          'Даже краткосрочное пребывание под прямыми солнечными лучами может спровоцировать сильные ожоги. ' +
+          'Другие, не такие опасные, но неприятные последствия – это дерматит, сухость, перхоть.',
         category: 'Dog'
       },
       {
         id: 3,
-        title: 'Third Article',
-        description: 'Just description',
+        title: 'Статья про туман',
+        description: 'Эх... туман',
         category: 'Fog'
       }
     ];
@@ -60,25 +68,31 @@ const Articles = () => {
 
   return (
     <div>
-      <div className='font-weight-bold'>Статьи</div>
+      <div className='d-flex font-weight-bold h3'>
+        <div className='flex-grow-1'>
+          Статьи
+        </div>
+        <Link to={`/content/articles/create`}>
+          <Figure>
+            <Figure.Image src={CreateArticle} width={35}/>
+          </Figure>
+        </Link>
+      </div>
       {currentArticles.map(item => (
         <div className='mb-3 pl-3 pt-2 pr-3 pb-3 border rounded container'>
-        {/*//   <h2 key={item.itemId}>*/}
-        {/*//     <Link to={`/content/articles/${item.itemId}`} style={styleLink}>{item.item.name}</Link>*/}
-        {/*  // </h2>*/}
           <div key={item.id} className='row' >
-            <Link to={`/content/articles/${item.id}`} className={styleLink}>
+            <Link to={{pathname: `/content/articles/${item.id}`, state: {item}}} className={styleLink}>
                 <div className='font-weight-bold'>
                     {item.title}
                     <span className="ml-2 badge badge-dark">{item.category}</span>
                 </div>
-                <div className=''>
-                    {item.description}
+                <div className='text-black-50 text-monospace'>
+                    {item.description.length < 100 ? item.description : item.description.substr(0, 98) + '...'}
                 </div>
             </Link>
-              <button type="button" className="close col-1" aria-label="Close" onClick={() => {deleteItem(item.id)}}>
-                  <span aria-hidden="true">×</span>
-              </button>
+            <button type="button" className="close col-1" aria-label="Close" onClick={() => {deleteItem(item.id)}}>
+                <span aria-hidden="true">×</span>
+            </button>
           </div>
         </div>
       ))}
