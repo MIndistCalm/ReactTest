@@ -1,4 +1,4 @@
-const articles = [
+export const articles = [
   {
     id: 1,
     title: 'КАСТРАЦИЯ КОТА',
