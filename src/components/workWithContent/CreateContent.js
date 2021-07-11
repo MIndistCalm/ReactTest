@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
+import {useHistory} from "react-router-dom";
+
 
 const CreateContent = () => {
+  const history = useHistory()
 
   const createArticleOnClick = (event) => {
     // ВМЕСТО ЛОКАЛ СТОРЭДЖ НАДО ЗАПРОСЫ НА СЕРВ ОТПРАВЛЯТЬ
@@ -15,10 +18,16 @@ const CreateContent = () => {
     }
     mas.push(mas1)
     localStorage.setItem('Articles', JSON.stringify(mas))
+    history.push(`/content/articles`)
   }
 
   // вместо этого нужно делать get запрос на сервер
   const masCategories = JSON.parse(localStorage.getItem('Categories'));
+
+
+  // const goArticles = () => {
+  //   window.location.assign('.');
+  // }
 
   return (
     <Form onSubmit={createArticleOnClick}>
@@ -40,10 +49,10 @@ const CreateContent = () => {
         <Form.Label>Добавить описание</Form.Label>
         <Form.Control as="textarea"/>
       </Form.Group>
-
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" >
         Подтвердить
       </Button>
+
     </Form>
   );
 };

@@ -10,7 +10,7 @@ const Articles = () => {
 
   const [itemsMas, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [articlesPerPage, setArticlesPerPage] = useState(10);
+  const [articlesPerPage, setArticlesPerPage] = useState(5);
 
   const deleteItem = (id) => {
     const mas = JSON.parse(localStorage.getItem('Articles'));
