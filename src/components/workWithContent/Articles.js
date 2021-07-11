@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 import {Figure} from "react-bootstrap";
 import CreateArticle from '../../static/plus-square.svg'
 import {articles} from '../../store/ArticleStore'
+import {categories} from '../../store/CategoryStore'
 
 const Articles = () => {
 
@@ -22,6 +23,7 @@ const Articles = () => {
 
   //восстановить локал сторэдж
   // localStorage.setItem('Articles', JSON.stringify(articles));
+  localStorage.setItem('Categories', JSON.stringify(categories));
   // console.log(itemsMas)
 
   useEffect(() => {

@@ -1,3 +1,5 @@
+import {categories} from "./CategoryStore";
+
 export const articles = [
   {
     id: 1,
