@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 
-
 const CreateContent = () => {
   const history = useHistory()
 
@@ -23,11 +22,6 @@ const CreateContent = () => {
 
   // вместо этого нужно делать get запрос на сервер
   const masCategories = JSON.parse(localStorage.getItem('Categories'));
-
-
-  // const goArticles = () => {
-  //   window.location.assign('.');
-  // }
 
   return (
     <Form onSubmit={createArticleOnClick}>

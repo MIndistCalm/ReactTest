@@ -1,29 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {Link, Route, Switch, useHistory, useParams, useLocation} from "react-router-dom";
-import {ButtonGroup, Col, Container, Figure, Image, Row} from "react-bootstrap";
+import React, {useEffect} from 'react';
+import {Link} from "react-router-dom";
+import {Col, Container, Figure, Image, Row} from "react-bootstrap";
 import EditImage from '../../static/edit.png'
 
 const ArticleDetail = (props) => {
 
   const styleLink = 'pl-3 pr-3 text-decoration-none align-middle rounded'
 
-  useEffect(() => {
-    fetchItem();
-    // console.log(match)
-  }, []);
+  // useEffect(() => {
+  //   fetchItem();
+  // }, []);
+  //
+  // const fetchItem = async () => {
+  //
+  // }
 
-  // const [item, setItem] = useState({
-  //   images: {}
-  // });
-
-  const fetchItem = async () => {
-    // const fetchItem = await fetch( `https://fortnite-api.theapinetwork.com/item/get?id=${match.params.id}`);
-    // const items = await fetchItem.json();
-    // setItem(item);
-    // console.log();
-  }
-
-  console.log(props)
+  // console.log(props)
 
   return (
     <Container>
@@ -33,7 +25,8 @@ const ArticleDetail = (props) => {
             <div>
               {props.location.state.item.title}
             </div>
-            <Link to={`/content/articles/${props.match.params.id}/edit`} className={styleLink}>
+            <Link to={`/content/articles/${props.match.params.id}/edit`}
+                  className={styleLink}>
               <Figure>
                 <Figure.Image src={EditImage} width={20} />
               </Figure>
