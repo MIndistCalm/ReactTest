@@ -38,7 +38,7 @@ const CreateContent = () => {
 
       <Form.Group controlId="formBasicCategory">
         <Form.Label>Добавить описание</Form.Label>
-        <Form.Control type="text"/>
+        <Form.Control as="textarea"/>
       </Form.Group>
 
       <Button variant="primary" type="submit">
