@@ -23,7 +23,7 @@ const Articles = () => {
 
   //восстановить локал сторэдж
   // localStorage.setItem('Articles', JSON.stringify(articles));
-  localStorage.setItem('Categories', JSON.stringify(categories));
+  // localStorage.setItem('Categories', JSON.stringify(categories));
 
   useEffect(() => {
     setItems(JSON.parse(localStorage.getItem('Articles')))

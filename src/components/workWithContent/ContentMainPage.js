@@ -11,6 +11,7 @@ import ArticleDetail from "./ArticleDetail";
 import EditContent from "./EditContent";
 import DeleteContent from "./DeleteContent";
 import CreateContent from "./CreateContent";
+import CategoryArticlesCreate from "./CategoryArticlesCreate";
 
 const ContentMainPage = () => {
 
@@ -36,7 +37,8 @@ const ContentMainPage = () => {
             <Route path={`/content/articles/:id/edit`} component={EditContent} />
             <Route path={`/content/articles/:id/delete`} component={DeleteContent} />
             <Route path={`/content/quotes`} component={Quotes} />
-            <Route path={`/content/category/articles`} component={CategoryArticles} />
+            <Route path={`/content/category/articles`} exact component={CategoryArticles} />
+            <Route path={`/content/category/articles/create`} component={CategoryArticlesCreate} />
             <Route path={`/content/category/quotes`} component={CategoryQuotes} />
           </Switch>
         </Col>
