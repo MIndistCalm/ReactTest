@@ -32,9 +32,6 @@ const CategoryArticlesCreate = () => {
     history.push(`/content/category/articles`)
   }
 
-  // вместо этого нужно делать get запрос на сервер
-  // const masCategories = JSON.parse(localStorage.getItem('Categories'));
-
   return (
     <Form onSubmit={createCategoryOnClick}>
       <Form.Group controlId="formBasicCategory">

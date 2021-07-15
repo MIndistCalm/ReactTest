@@ -8,15 +8,27 @@ import {categories} from '../../store/CategoryStore'
 
 const Articles = () => {
 
-  const [itemsMas, setItems] = useState([]);
+  const [articlesMas, setArticle] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage, setArticlesPerPage] = useState(5);
 
-  const deleteItem = (id) => {
-    const mas = JSON.parse(localStorage.getItem('Articles'));
-    delete mas[id - 1];
-    localStorage.setItem('Articles', JSON.stringify(mas.filter(item => !!item)));
-    setItems(JSON.parse(localStorage.getItem('Articles')))
+  const indexOfLastArticle = currentPage * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+  const currentArticles = articlesMas.slice(indexOfFirstArticle, indexOfLastArticle);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const deleteItem = async (id) => {
+    await fetch('http://localhost:8000/api/content/contents/' + id, {
+      method: 'DELETE',
+      headers: {
+        "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
+        "Content-Type": "application/json",
+      }
+    })
+      .then(res => res.text()) // or res.json()
+      .then(res => console.log(res))
+    getArticles()
   }
 
   const styleLink = 'text-decoration-none text-dark d-block col-11'
@@ -26,14 +38,20 @@ const Articles = () => {
   // localStorage.setItem('Categories', JSON.stringify(categories));
 
   useEffect(() => {
-    setItems(JSON.parse(localStorage.getItem('Articles')))
+    getArticles()
+    getArticles()
   }, [])
 
-  const indexOfLastArticle = currentPage * articlesPerPage;
-  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = itemsMas.slice(indexOfFirstArticle, indexOfLastArticle);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const getArticles = async () => {
+    await fetch(`http://localhost:8000/api/content/contents/`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setArticle(data.data);
+      });
+  }
+  console.log(articlesMas)
 
   return (
     <div>
@@ -48,8 +66,8 @@ const Articles = () => {
         </Link>
       </div>
       {currentArticles.map(item => (
-        <div className='mb-3 pl-3 pt-2 pr-3 pb-3 border rounded container'>
-          <div key={item.id} className='row' >
+        <div key={item.id} className='mb-3 pl-3 pt-2 pr-3 pb-3 border rounded container'>
+          <div className='row' >
             <Link to={{pathname: `/content/articles/${item.id}`, state: {item}}} className={styleLink}>
                 <div className='font-weight-bold'>
                     {item.title}
@@ -65,7 +83,7 @@ const Articles = () => {
           </div>
         </div>
       ))}
-      <Pagination articlesPerPage={articlesPerPage} totalArticles={itemsMas.length} paginate={paginate}/>
+      <Pagination articlesPerPage={articlesPerPage} totalArticles={articlesMas.length} paginate={paginate}/>
     </div>
   );
 };
