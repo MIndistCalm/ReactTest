@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import Pagination from "./Pagination";
 import {Figure} from "react-bootstrap";
 import CreateArticle from '../../static/plus-square.svg'
+import {getItem, deleteItem} from "./Requests";
 
 const Articles = () => {
 
@@ -16,40 +17,26 @@ const Articles = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const deleteItem = async (id) => {
-    await fetch('http://localhost:8000/api/content/contents/' + id, {
-      method: 'DELETE',
-      headers: {
-        "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
-        "Content-Type": "application/json",
-      }
-    })
-      .then(res => res.text()) // or res.json()
-      .then(res => console.log(res))
-    getArticles()
-  }
-
+  const urlContent = `http://localhost:8000/api/content/contents/`
   const styleLink = 'text-decoration-none text-dark d-block col-11'
 
-  //восстановить локал сторэдж
-  // localStorage.setItem('Articles', JSON.stringify(articles));
-  // localStorage.setItem('Categories', JSON.stringify(categories));
+  const deleteItems = async (id) => {
+    deleteItem(urlContent, id)
+    upd()
+  }
+
 
   useEffect(() => {
-    getArticles()
-    getArticles()
+    upd()
+    upd()
   }, [])
 
-  const getArticles = async () => {
-    await fetch(`http://localhost:8000/api/content/contents/`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setArticle(data.data);
-      });
+  function upd(){
+    const item = getItem(urlContent)
+    item.then((data) => {
+      setArticle(data.data)
+    })
   }
-  console.log(articlesMas)
 
   return (
     <div>
@@ -75,7 +62,7 @@ const Articles = () => {
                     {item.description.length < 100 ? item.description : item.description.substr(0, 98) + '...'}
                 </div>
             </Link>
-            <button type="button" className="close col-1" aria-label="Close" onClick={() => {deleteItem(item.id)}}>
+            <button type="button" className="close col-1" aria-label="Close" onClick={() => {deleteItems(item.id)}}>
                 <span aria-hidden="true">×</span>
             </button>
           </div>

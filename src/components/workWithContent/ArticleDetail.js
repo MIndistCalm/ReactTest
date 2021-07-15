@@ -1,86 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
 import {Col, Container, Figure, Row} from "react-bootstrap";
 import EditImage from '../../static/edit.png'
 
 const ArticleDetail = (props) => {
-
   const styleLink = 'pl-3 pr-3 text-decoration-none align-middle rounded'
-
-  // const url = 'http://localhost:8000/api/content/contents/';
-  // const data = {
-  //   "id": 1,
-  //   "title": "Вторая статья",
-  //   "description": "Первая отправленая статья",
-  //   "userId": 1,
-  //   "categories": [1],
-  //   "content": "asldfkjjsdlkj123"
-  // };
-
-  useEffect(() => {
-    getCategories()
-    // postItem()
-    // putItem()
-    getContent()
-  }, []);
-
-  // const postItem = async () => {
-  //   await fetch(url, {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //     //make sure to serialize your JSON body
-  //     headers: {
-  //       "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //     .then(response => {
-  //       response.json()
-  //       console.log(response)
-  //     })
-  //     .then(body => {
-  //       console.log(body);
-  //     });
-  // }
-
-  // const putItem = async () => {
-  //   await fetch(url, {
-  //     method: "PUT",
-  //     body: JSON.stringify(data),
-  //     //make sure to serialize your JSON body
-  //     headers: {
-  //       "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //     .then(response => {
-  //       response.json()
-  //       console.log(response)
-  //     })
-  //     .then(body => {
-  //       console.log(body);
-  //     });
-  // }
-
-  const getCategories = async () => {
-    await fetch(`http://localhost:8000/api/content/categories/`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
-  }
-
-  const getContent = async () => {
-    await fetch(`http://localhost:8000/api/content/contents/`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
-  }
 
   return (
     <Container>

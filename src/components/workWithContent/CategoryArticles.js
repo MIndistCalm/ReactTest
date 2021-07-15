@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {Figure} from "react-bootstrap";
 import CreateArticle from "../../static/plus-square.svg";
 import Pagination from "./Pagination";
+import {getItem, deleteItem} from "./Requests";
 
 const CategoryArticles = () => {
 
@@ -16,34 +17,22 @@ const CategoryArticles = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const deleteItem = async (id) => {
-    await fetch('http://localhost:8000/api/content/categories/' + id, {
-      method: 'DELETE',
-      headers: {
-        "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
-        "Content-Type": "application/json",
-      }
+  const urlCategory = `http://localhost:8000/api/content/categories/`
+
+  const deleteItems = async (id) => {
+    deleteItem(urlCategory, id)
+    const item = getItem(urlCategory)
+    item.then((data) => {
+      setCategories(data.data)
     })
-      .then(res => res.text()) // or res.json()
-      .then(res => console.log(res))
-    getCategories()
   }
 
   useEffect(() => {
-    getCategories()
+    const item = getItem(urlCategory)
+    item.then((data) => {
+      setCategories(data.data)
+    })
   }, [])
-
-
-  const getCategories = async () => {
-    await fetch(`http://localhost:8000/api/content/categories/`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setCategories(data.data);
-      });
-  }
-  console.log(categoryMas)
 
   return (
     <div>
@@ -63,7 +52,7 @@ const CategoryArticles = () => {
             <div className='font-weight-bold text-decoration-none text-dark d-block col-11'>
               {item.name}
             </div>
-            <button type="button" className="close col-1" aria-label="Close" onClick={() => {deleteItem(item.id)}}>
+            <button type="button" className="close col-1" aria-label="Close" onClick={() => {deleteItems(item.id)}}>
               <span aria-hidden="true">×</span>
             </button>
           </div>

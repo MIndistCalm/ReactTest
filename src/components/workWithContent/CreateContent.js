@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
+import {getItem, postItem} from "./Requests";
 
 const CreateContent = () => {
   const history = useHistory()
   const [categoryMas, setCategories] = useState([]);
+  const urlContent = `http://localhost:8000/api/content/contents/`
+  const urlCategory = `http://localhost:8000/api/content/categories/`
 
   const createArticleOnClick = (event) => {
     event.preventDefault()
     console.log(event.target[0].value, parseInt(event.target[1].value), event.target[2].value)
-    const urlArticle = 'http://localhost:8000/api/content/contents/'
     const article = {
       "id": 1,
       "title": event.target[0].value,
@@ -19,39 +21,15 @@ const CreateContent = () => {
       "content": "asldfkjjsdlkj123"
     }
 
-    fetch(urlArticle, {
-      method: "POST",
-      body: JSON.stringify(article),
-      //make sure to serialize your JSON body
-      headers: {
-        "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
-        "Content-Type": "application/json",
-      }
-    })
-      .then(response => {
-        response.json()
-        // console.log(response)
-      })
-      .then(body => {
-        console.log(body);
-      });
+    postItem(urlContent, article)
     history.push(`/content/articles`)
   }
 
-  // вместо этого нужно делать get запрос на сервер
-  // const masCategories = JSON.parse(localStorage.getItem('Categories'));
-
-  const getCategories = async () => {
-    await fetch(`http://localhost:8000/api/content/categories/`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setCategories(data.data);
-      });
-  }
   useEffect(() => {
-    getCategories()
+    const item = getItem(urlCategory)
+    item.then((data) => {
+      setCategories(data.data)
+    })
   }, [])
 
   return (
