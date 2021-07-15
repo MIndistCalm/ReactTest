@@ -7,15 +7,15 @@ const ArticleDetail = (props) => {
 
   const styleLink = 'pl-3 pr-3 text-decoration-none align-middle rounded'
 
-  const url = 'http://localhost:8000/api/content/contents/';
-  const data = {
-    "id": 1,
-    "title": "Вторая статья",
-    "description": "Первая отправленая статья",
-    "userId": 1,
-    "categories": [1],
-    "content": "asldfkjjsdlkj123"
-  };
+  // const url = 'http://localhost:8000/api/content/contents/';
+  // const data = {
+  //   "id": 1,
+  //   "title": "Вторая статья",
+  //   "description": "Первая отправленая статья",
+  //   "userId": 1,
+  //   "categories": [1],
+  //   "content": "asldfkjjsdlkj123"
+  // };
 
   useEffect(() => {
     getCategories()

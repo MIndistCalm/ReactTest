@@ -3,14 +3,12 @@ import {Link} from "react-router-dom";
 import Pagination from "./Pagination";
 import {Figure} from "react-bootstrap";
 import CreateArticle from '../../static/plus-square.svg'
-import {articles} from '../../store/ArticleStore'
-import {categories} from '../../store/CategoryStore'
 
 const Articles = () => {
 
   const [articlesMas, setArticle] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [articlesPerPage, setArticlesPerPage] = useState(5);
+  const [articlesPerPage] = useState(5);
 
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;

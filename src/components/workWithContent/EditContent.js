@@ -56,30 +56,34 @@ const EditContent = (props) => {
     history.push(`/content/articles`)
   }
 
-  useEffect(() => {
+  useEffect((url) => {
+    const getArticles = async () => {
+      await fetch(url)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setArticle(data);
+        });
+    }
+
+    const getCategories = async () => {
+      await fetch(`http://localhost:8000/api/content/categories/`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setCategories(data.data);
+        });
+    }
+
     getArticles()
     getCategories()
   }, [])
 
-  const getArticles = async () => {
-    await fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setArticle(data);
-      });
-  }
 
-  const getCategories = async () => {
-    await fetch(`http://localhost:8000/api/content/categories/`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setCategories(data.data);
-      });
-  }
+
+
 
   console.log(articleMas, categoryMas)
 

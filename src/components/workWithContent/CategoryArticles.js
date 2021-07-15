@@ -8,7 +8,7 @@ const CategoryArticles = () => {
 
   const [categoryMas, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [articlesPerPage, setArticlesPerPage] = useState(5);
+  const [articlesPerPage] = useState(5);
 
   const indexOfLastCategory = currentPage * articlesPerPage;
   const indexOfFirstCategory = indexOfLastCategory - articlesPerPage;
