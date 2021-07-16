@@ -25,7 +25,6 @@ const Articles = () => {
     upd()
   }
 
-
   useEffect(() => {
     upd()
     upd()

@@ -3,7 +3,7 @@ import {Button, Form} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import {getItem, postItem} from "./Requests";
 
-const CreateContent = () => {
+const CreateContent = (props) => {
   const history = useHistory()
   const [categoryMas, setCategories] = useState([]);
   const urlContent = `http://localhost:8000/api/content/contents/`
@@ -11,7 +11,6 @@ const CreateContent = () => {
 
   const createArticleOnClick = (event) => {
     event.preventDefault()
-    console.log(event.target[0].value, parseInt(event.target[1].value), event.target[2].value)
     const article = {
       "id": 1,
       "title": event.target[0].value,
@@ -32,6 +31,14 @@ const CreateContent = () => {
     })
   }, [])
 
+  let condition
+  console.log(props.match.params)
+  if (props.match.params.length === 0) {
+    condition = true
+  } else {
+    condition = false
+  }
+  console.log(condition)
   return (
     <Form onSubmit={createArticleOnClick}>
       <Form.Group controlId="formBasicArticle">

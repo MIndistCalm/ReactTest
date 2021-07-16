@@ -27,7 +27,7 @@ const ContentMainPage = () => {
         <Col md={10}>
           <Switch>
             <Route path={`/content/articles`} exact component={Articles} />
-            <Route path={`/content/articles/create`} component={CreateContent} />
+            <Route path={`/content/articles/create`} component={EditContent} />
             <Route path={`/content/articles/:id`} exact component={ArticleDetail} />
             <Route path={`/content/articles/:id/edit`} component={EditContent} />
             <Route path={`/content/category/articles`} exact component={CategoryArticles} />
