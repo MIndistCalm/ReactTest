@@ -22,21 +22,22 @@ const Articles = () => {
 
   const deleteItems = async (id) => {
     deleteItem(urlContent, id)
-    upd()
+    update()
   }
 
   useEffect(() => {
-    upd()
-    upd()
+    update()
+    update()
   }, [])
 
-  function upd(){
+  function update(){
     const item = getItem(urlContent)
     item.then((data) => {
       setArticle(data.data)
     })
   }
 
+  console.log(articlesMas)
   return (
     <div>
       <div className='d-flex font-weight-bold h3'>

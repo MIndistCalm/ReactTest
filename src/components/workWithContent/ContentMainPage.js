@@ -7,7 +7,6 @@ import Articles from "./Articles";
 import CategoryArticles from "./CategoryArticles";
 import ArticleDetail from "./ArticleDetail";
 import EditContent from "./EditContent";
-import CreateContent from "./CreateContent";
 import CategoryArticlesCreate from "./CategoryArticlesCreate";
 
 const ContentMainPage = () => {

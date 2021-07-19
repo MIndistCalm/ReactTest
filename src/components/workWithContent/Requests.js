@@ -21,10 +21,7 @@ export const postItem = async (url, data) => {
     method: "POST",
     body: JSON.stringify(data),
     //make sure to serialize your JSON body
-    headers: {
-      "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
-      "Content-Type": "application/json"
-    }
+    headers: header
   })
     .then(response => {
       response.json()
@@ -39,10 +36,7 @@ export const putItem = async (url, data) => {
     method: "PUT",
     body: JSON.stringify(data),
     //make sure to serialize your JSON body
-    headers: {
-      "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
-      "Content-Type": "application/json"
-    }
+    headers: header
   })
     .then(response => {
       response.json()
@@ -55,10 +49,7 @@ export const putItem = async (url, data) => {
 export const deleteItem = async (url, id) => {
   await fetch(url + id, {
     method: 'DELETE',
-    headers: {
-      "YT-AUTH-TOKEN": "YourTar 878b9c2d1b9eb1e5cbb140b2cf756ae323ad91ac0aba06a5d66652af77cfa5c7eb247d7be0c86c02557b6bb0f0f7f139abadd76df4a23be3f17f2ffc15806226",
-      "Content-Type": "application/json"
-    }
+    headers: header
   })
     .then(res => res.text()) // or res.json()
     .then(res => console.log(res))

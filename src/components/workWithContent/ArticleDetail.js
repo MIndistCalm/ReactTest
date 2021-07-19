@@ -6,6 +6,7 @@ import EditImage from '../../static/edit.png'
 const ArticleDetail = (props) => {
   const styleLink = 'pl-3 pr-3 text-decoration-none align-middle rounded'
 
+  console.log(props)
   return (
     <Container>
       <Row className='mt-3'>
@@ -21,7 +22,11 @@ const ArticleDetail = (props) => {
               </Figure>
             </Link>
           </div>
-          <div className='h5 font-weight-bold text-muted pl-3'>Категория: {props.location.state.item.category}</div>
+          <div className='h5 font-weight-bold text-muted pl-3'>Категория: {
+            props.location.state.item.categories.map(item => {
+              return item.name + ' '
+            })
+          }</div>
           <div className='h5 text-monospace pl-3 pb-3'>{props.location.state.item.description}</div>
         </Col>
       </Row>

@@ -54,6 +54,14 @@ const CreateContent = (props) => {
           ))}
         </Form.Control>
       </Form.Group>
+      <Form.Group controlId="exampleForm.ControlSelect">
+        <Form.Label>Выбрать категорию</Form.Label>
+        <Form.Control as="select">
+          {categoryMas.map(item => (
+            <option key={item.id}>{item.id} {item.name}</option>
+          ))}
+        </Form.Control>
+      </Form.Group>
 
       <Form.Group controlId="formBasicCategory">
         <Form.Label>Добавить описание</Form.Label>
