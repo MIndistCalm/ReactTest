@@ -22,22 +22,23 @@ const Articles = () => {
 
   const deleteItems = async (id) => {
     deleteItem(urlContent, id)
-    update()
-  }
-
-  useEffect(() => {
-    update()
-    update()
-  }, [])
-
-  function update(){
     const item = getItem(urlContent)
     item.then((data) => {
       setArticle(data.data)
     })
   }
 
-  console.log(articlesMas)
+  useEffect(() => {
+    const item = getItem(urlContent)
+    item.then((data) => {
+      setArticle(data.data)
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log('random')
+  }, [articlesMas])
+
   return (
     <div>
       <div className='d-flex font-weight-bold h3'>

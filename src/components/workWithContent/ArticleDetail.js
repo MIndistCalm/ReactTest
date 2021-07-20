@@ -6,7 +6,6 @@ import EditImage from '../../static/edit.png'
 const ArticleDetail = (props) => {
   const styleLink = 'pl-3 pr-3 text-decoration-none align-middle rounded'
 
-  console.log(props)
   return (
     <Container>
       <Row className='mt-3'>

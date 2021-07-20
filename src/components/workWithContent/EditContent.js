@@ -6,7 +6,9 @@ import {getItem, postItem, putItem} from "./Requests";
 const EditContent = (props) => {
   const history = useHistory()
 
-  const [articleMas, setArticle] = useState([]);
+  const [articleMas, setArticle] = useState({
+    categories: ['Loading']
+  });
   const [categoryMas, setCategories] = useState([]);
 
   const urlContent = `http://localhost:8000/api/content/contents/`
@@ -16,8 +18,6 @@ const EditContent = (props) => {
   let condition
   // if there is id in props then: true, else false
   condition = !!props.match.params.id;
-  // console.log(props.match.params.id)
-  let selectable = true
 
   const createArticleOnClick = (event) => {
     event.preventDefault()
@@ -33,60 +33,58 @@ const EditContent = (props) => {
       "content": "asldfkjjsd"
     };
 
-    // console.log(selectCategory, data)
-    // console.log(articleMas.categories)
-
     condition ? putItem(urlContentId, data) : postItem(urlContent, data)
     history.push(`/content/articles`)
   }
 
   useEffect(() => {
-    const item = getItem(urlCategory)
-    item.then((data) => {
-      setCategories(
-        data.data.map(item => {
-          return {
-            select: false,
-            id: item.id,
-            name: item.name
-          }
-        })
-      )
-    })
-    if (condition) {
+    if (condition){
       const item1 = getItem(urlContentId)
       item1.then((data) => {
+        console.log(data)
         setArticle(data)
       })
-      // console.log(categoryMas)
-      // let option = {...categoryMas.select}
-      // option[0] = true
-      // setCategories({ select: { ...categoryMas.select, select: true} });
-      // console.log(option, categoryMas)
-      // setCategories(
-      // categoryMas.map(item => {
-      //   // console.log(item)
-      //   item.select = articleMas.categories.forEach(element => {
-      //     if (element.name === item.name) {
-      //       console.log(element.name, item.name)
-      //     }
-      //   })
-      // })
-
-      // {select: categoryMas.map(item => {
-      //         articleMas.categories.forEach(element => {
-      //           if (element.name == item.name) return true
-      //         })
-      //       })}
-      // )
-
     }
   }, [])
 
-  // console.log(selectable)
+  useEffect(() => {
+    if (condition) {
+      let mas = []
+      articleMas.categories.map(item => mas.push(item.id))
+      const item = getItem(urlCategory)
+
+      item.then((data) => {
+        setCategories(
+          data.data.map(category => {
+            mas.forEach(element => {
+              if (category.id === element) category.select = true
+            })
+            return {
+              select: !!category.select,
+              id: category.id,
+              name: category.name
+            }
+          })
+        )
+      })
+    } else {
+      const item = getItem(urlCategory)
+      item.then((data) => {
+        setCategories(
+          data.data.map(item => {
+            return {
+              select: false,
+              id: item.id,
+              name: item.name
+            }
+          })
+        )
+      })
+    }
+  }, [articleMas])
 
   return (
-    <Form onSubmit={createArticleOnClick} controlId='mainForm'>
+    <Form onSubmit={createArticleOnClick}>
       <Form.Group controlId="formBasicArticle">
         <Form.Label>Заголовок</Form.Label>
         <Form.Control type="text" defaultValue={condition ? articleMas.title : null}/>
@@ -96,26 +94,16 @@ const EditContent = (props) => {
         <Form.Label>Выбрать категорию</Form.Label>
         {categoryMas.map(item => (
           <Form.Check key={item.id} type='checkbox' label={item.name}
-                      checked={
-                        articleMas.categories.map(article => {
-                          if (article.name == item.name) {
-                            item.select = true
-                            console.log(item.select, article.name)
-                            return item.select
-                          } else {
-                            return item.select
-                          }
-                        })
-                      }
+                      checked={item.select}
                       onChange={event => {
-            let checked = event.target.checked
-            setCategories(
-              categoryMas.map(data => {
-                if (item.id === data.id) data.select = checked
-                return data
-              })
-            )
-          }}
+                        let checked = event.target.checked
+                        setCategories(
+                          categoryMas.map(data => {
+                            if (item.id === data.id) data.select = checked
+                            return data
+                          })
+                        )
+                      }}
           />
         ))}
       </Form.Group>

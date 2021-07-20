@@ -21,20 +21,22 @@ const CategoryArticles = () => {
 
   const deleteItems = async (id) => {
     deleteItem(urlCategory, id)
-    update()
-  }
-
-  useEffect(() => {
-    update()
-    update()
-  }, [])
-
-  function update(){
     const item = getItem(urlCategory)
     item.then((data) => {
       setCategories(data.data)
     })
   }
+
+  useEffect(() => {
+    const item = getItem(urlCategory)
+    item.then((data) => {
+      setCategories(data.data)
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log('random')
+  }, [categoryMas])
 
   return (
     <div>
